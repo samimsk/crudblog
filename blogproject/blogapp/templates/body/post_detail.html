@@ -1,0 +1,65 @@
+{% extends 'navbar/nav.html' %}
+
+{% block title %}Post | {{ post.title }}{% endblock %}
+
+{% block content %}
+
+<div class="container text-center">
+
+	<br>
+	<br>
+	<br>
+	<div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				  	<h3>{{ post.title }}</h3>
+				  </div>
+				  <div class="panel-body">
+				    <p>{{ post.detail }}</p>
+				  </div>
+				  <div class="panel-body">
+				    <p>{{ post.time }} &nbsp &nbsp Posted by : {{ post.written_by }}</p>
+				  </div>
+				  <br>
+				  <br>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				{% if user.is_authenticated %}
+				<form action="{% url 'post_response' post.id %}" method="POST" >
+					{% csrf_token %}
+				  <div class="form-group">
+				    Type in your reply
+				  </div>
+				  <div class="form-group">
+				    {{ form.detail }}
+				  </div>
+				  <button type="submit" class="btn btn-primary">Post</button>
+				</form>
+				{% else %}
+				<p>Please login to post response.</p>
+				{% endif %}
+				<br>
+				<br>
+				<h3>Responses: </h3>
+				{% for response in post.post_name.all %}
+					<div class="panel">
+						<br>
+						<div class="panel-heading">
+					 		<p>{{ response.detail }}</p>
+					 	</div>
+					 	<p><strong>Response by: </strong>{{ response.response_by }}</p>
+					</div>
+					<br>
+					<br>
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

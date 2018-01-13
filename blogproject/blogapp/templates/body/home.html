@@ -1,0 +1,37 @@
+{% extends 'navbar/nav.html' %}
+
+{% block title %}Blog | Home{% endblock %}
+
+{% block content %}
+
+<div class="container text-center">
+
+	<h1 class="my-4">
+	<small>Recently Added Posts</small>
+	</h1>
+	<br>
+	<br>
+	<br>
+	<div>
+		<div class="row">
+			{% for post in posts %}
+			<div class="col-lg-3">
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				  	<h4>{{ post.title }}</h4>
+				  </div>
+				  <div class="panel-body">
+				    <p>{{ post.detail|truncatechars:70 }}..</p>
+				  </div>
+				  <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">View post</a>
+				  <br>
+				  <br>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
