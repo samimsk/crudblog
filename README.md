@@ -12,4 +12,4 @@ API endpoints :
 /api/posts/1/responselist -list of all replies
 /api/posts/1/create-response - create response
 /api/register - register
-/api/login - login
+/api-token-auth/ -obtain jwt token( with data format {"username": "", password: ""})
